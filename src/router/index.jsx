@@ -5,11 +5,11 @@ import Signup from "../component/Signup";
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Login/>
+        element: <Signup/>
     },
     {
-        path: '/Signup',
-        element: <Signup/>
+        path: '/Login',
+        element: <Login/>
     }
 ])
 export default router;
