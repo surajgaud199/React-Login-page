@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import {AuthContext} from './Authprovidar';
+import { Link } from 'react-router-dom';
 
 function Signup(){
     const [email, setEmail] = useState('')
@@ -33,6 +34,8 @@ function Signup(){
                   <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Submit</button>
 
             </form>
+            <hr className='mt-2 text-2xl'/>
+            <Link to="/Login">Go to Login</Link>
         </div>
     </div>
     )

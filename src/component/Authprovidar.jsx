@@ -1,5 +1,5 @@
 import React,{ createContext, useState } from 'react';
-import  {userSignup} from '../APIs';
+import  {userLogin, userSignup} from '../APIs';
 
 export const AuthContext = createContext(null);
 
@@ -7,8 +7,13 @@ function AuthProvider({children}){
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
 
-    const login = () => {
+    const login = ({email, password}) => {
+      const data = userLogin({email, password});
+      if(data){
 
+      }else{
+        setError('Email or Password is incorrect.....')
+      }
     }
 
     const Signup = ({email, password}) => {
