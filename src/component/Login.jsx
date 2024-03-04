@@ -1,22 +1,34 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {AuthContext} from './Authprovidar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 function Login(){
     const [email, setEmail] = useState('')
     const [password, setPassword]= useState('')
+    const navigate = useNavigate();
+    const {user, error, login } = useContext(AuthContext)
 
-    const {error, login } = useContext(AuthContext)
+    function Handlelogin(e){
+    e.preventDefault();
+    if(login({email, password})) {
+        navigate("/Profile/");
+    }
+    
+    }
 
-    function landlelogin(e){
-     e.preventDefault();
-     login({email,password})
-     console.log(email,password);
-    }       
+    // useEffect(() => {
+    //   if(user){
+    //     // navigate("/Profile/");
+    //   }
+    // },[user])
+
+     
+
     return(
         <div className='flex items-center justify-center h-screen'>
         <div className=' bg-blue-200 shadow-md rounded px-8 pb-8 mb-4'>
-            <form className='' onSubmit={landlelogin}>
+            <form className='' onSubmit={Handlelogin}>
                 <h1 className='text-2xl p-5 mb-5'>LOGIN</h1>
 
                 <div className='mb-4'>
@@ -35,7 +47,7 @@ function Login(){
 
             </form>
             <hr className='mt-2 text-2xl'/>
-            <Link to='/'>Go to SignUp</Link>
+            <Link to='/Signup'>Go to SignUp</Link>
         </div>
     </div>
     )

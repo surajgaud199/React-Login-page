@@ -1,23 +1,26 @@
 import React, { useContext, useState } from 'react';
 import {AuthContext} from './Authprovidar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Signup(){
     const [email, setEmail] = useState('')
     const [password, setPassword]= useState('')
+    const navigate = useNavigate();
 
     const {error, Signup } = useContext(AuthContext)
 
-    function landleSignup(e){
+    function handleSignup(e){
      e.preventDefault();
-     Signup({email,password})
+    if( Signup({email,password})) {
+        navigate("/Profile/")
+    }
      console.log(email,password);
     }       
     return(
         <div className='flex items-center justify-center h-screen'>
-        <div className='bg-white shadow-md rounded px-8 pb-8 mb-4'>
-            <form className='' onSubmit={landleSignup}>
-                <h1 className='text-2xl mb-4'>SignUP</h1>
+        <div className='bg-yellow-100 shadow-md rounded px-8 pb-8 mb-4'>
+            <form className='' onSubmit={handleSignup}>
+                <h1 className='text-2xl p-5 mb-5'>SignUP</h1>
 
                 <div className='mb-4'>
                     <label className='black text-gray-700 text-sm font-bold mb-2' htmlFor='emial'>Email</label>
@@ -35,7 +38,7 @@ function Signup(){
 
             </form>
             <hr className='mt-2 text-2xl'/>
-            <Link to="/Login">Go to Login</Link>
+            <Link to="/">Go to Login</Link>
         </div>
     </div>
     )

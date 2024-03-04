@@ -1,5 +1,5 @@
-import React,{ createContext, useState } from 'react';
-import  {userLogin, userSignup} from '../APIs';
+import React,{ createContext, useEffect, useState } from 'react';
+import  {chekLogin, userLogin, userSignup} from '../APIs';
 
 export const AuthContext = createContext(null);
 
@@ -10,9 +10,11 @@ function AuthProvider({children}){
     const login = ({email, password}) => {
       const data = userLogin({email, password});
       if(data){
-
+        setUser({email, name: "gaud suraj"})
+         return true;
       }else{
         setError('Email or Password is incorrect.....')
+        return false;
       }
     }
 
@@ -20,15 +22,25 @@ function AuthProvider({children}){
         console.log('Authprovider==>',email, password);
     const isSignup = userSignup({email, password});
     if(isSignup){
-
+        setUser({email, name: "gaud suraj"})
+        return true;
     }else{
         setError('Email already exists');
+        return false;
     }
     }
 
     const logout = () => {
 
     }
+
+    useEffect(() =>{
+      const user = chekLogin();
+        if(user){
+           
+            setUser({email: user, name: 'suraj gaud'});
+        }
+    },[])
 
     return(
         <AuthContext.Provider value={{user, error, login ,Signup, logout}} >

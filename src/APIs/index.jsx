@@ -1,5 +1,5 @@
  const USERS_KEY = 'users'
-
+ const CURRENT_USER = 'user'
  export const userSignup = ({email, password}) => {  
   let users = localStorage.getItem("USERS_KEY") || '[]';
   let isExist = false;
@@ -13,7 +13,8 @@
     );
   };
   users.push({email, password});
-  localStorage.setItem('users', JSON.stringify(users));
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  localStorage.setItem(CURRENT_USER, email)
   return(
     true
   ); 
@@ -25,8 +26,9 @@ export const userLogin = ({email, password}) => {
     users = JSON.parse(users);
     const user = users.find(item => item.email == email);
     if(user && user.password == password){
+      localStorage.setItem(CURRENT_USER, email)
       return(
-        users
+        user
       ) 
     };
     return(
@@ -36,4 +38,10 @@ export const userLogin = ({email, password}) => {
   return(
     false
   );
+};
+
+export const chekLogin = () => {
+  return(
+    localStorage.getItem(CURRENT_USER)
+    )
 };

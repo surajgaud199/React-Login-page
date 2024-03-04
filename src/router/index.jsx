@@ -9,11 +9,11 @@ import Dashboard from "../component/Dashboard";
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Signup/>
+        element: <Login/>
     },
     {
-        path: '/Login',
-        element: <Login/>
+        path: '/Signup',
+        element: <Signup/>
     },
     {
         path: '/Profile/',
