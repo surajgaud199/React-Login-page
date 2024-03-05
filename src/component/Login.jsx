@@ -11,17 +11,17 @@ function Login(){
 
     function Handlelogin(e){
     e.preventDefault();
-    if(login({email, password})) {
-        navigate("/Profile/");
+    login({email, password});
     }
     
-    }
+    useEffect(() => {
+        if(user){
+            navigate('/Profile/')
+        }
+    }, [user])
 
-    // useEffect(() => {
-    //   if(user){
-    //     // navigate("/Profile/");
-    //   }
-    // },[user])
+
+    
 
      
 

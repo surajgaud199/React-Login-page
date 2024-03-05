@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {AuthContext} from './Authprovidar';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -7,15 +7,18 @@ function Signup(){
     const [password, setPassword]= useState('')
     const navigate = useNavigate();
 
-    const {error, Signup } = useContext(AuthContext)
+    const {user, error, Signup } = useContext(AuthContext)
 
     function handleSignup(e){
      e.preventDefault();
-    if( Signup({email,password})) {
-        navigate("/Profile/")
+     Signup({email,password});
     }
-     console.log(email,password);
-    }       
+    
+    useEffect(() => {
+        if(user){
+            navigate('/Profile/')
+        }
+    }, [user]);
     return(
         <div className='flex items-center justify-center h-screen'>
         <div className='bg-yellow-100 shadow-md rounded px-8 pb-8 mb-4'>

@@ -1,5 +1,7 @@
  const USERS_KEY = 'users'
  const CURRENT_USER = 'user'
+
+
  export const userSignup = ({email, password}) => {  
   let users = localStorage.getItem("USERS_KEY") || '[]';
   let isExist = false;
@@ -20,6 +22,8 @@
   ); 
 };
 
+
+
 export const userLogin = ({email, password}) => {
   let users = localStorage.getItem(USERS_KEY);
   if(users){
@@ -39,6 +43,12 @@ export const userLogin = ({email, password}) => {
     false
   );
 };
+
+
+export const userLogout = () => {
+  localStorage.removeItem(CURRENT_USER);
+}
+
 
 export const chekLogin = () => {
   return(

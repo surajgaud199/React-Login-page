@@ -1,5 +1,5 @@
 import React,{ createContext, useEffect, useState } from 'react';
-import  {chekLogin, userLogin, userSignup} from '../APIs';
+import  {chekLogin, userLogin, userLogout, userSignup} from '../APIs';
 
 export const AuthContext = createContext(null);
 
@@ -19,19 +19,20 @@ function AuthProvider({children}){
     }
 
     const Signup = ({email, password}) => {
-        console.log('Authprovider==>',email, password);
+    console.log('Authprovider==>',email, password);
     const isSignup = userSignup({email, password});
     if(isSignup){
-        setUser({email, name: "gaud suraj"})
         return true;
     }else{
+        setUser({email, name: "gaud suraj"})
         setError('Email already exists');
         return false;
     }
     }
 
     const logout = () => {
-
+        userLogout();
+        setUser(null);
     }
 
     useEffect(() =>{
